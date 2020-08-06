@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="InventoryCleaner.main:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/InventoryCleaner_main_jar</output-path>
+    <root id="archive" name="InventoryCleaner.main.jar">
+      <element id="module-output" name="InventoryCleaner.main" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.stirante/lol-client-java-api/1.2.0/294460b82e594bd643d2442bfc7ccc971cb211fe/lol-client-java-api-1.2.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.json/json/20200518/41a767de4bde8f01d53856b905c49b2db8862f13/json-20200518.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
