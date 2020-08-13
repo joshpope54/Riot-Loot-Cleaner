@@ -1,9 +1,8 @@
 import com.stirante.lolclient.ClientApi;
 import generated.LolLootPlayerLoot;
+import generated.LolLootRedeemableStatus;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -21,7 +20,7 @@ public class MaterialsPanel extends JPanel {
     }
 
     public void createPanel(){
-        JButton disenchantAll = new JButton("Disenchant All");
+        JButton disenchantAll = new JButton("Disenchant Everything");
         disenchantAll.setBounds(20,50,120,30);
         disenchantAll.setFocusable(false);
         disenchantAll.addActionListener(new ActionListener() {
@@ -29,7 +28,11 @@ public class MaterialsPanel extends JPanel {
                 try {
                     LolLootPlayerLoot[] allPlayerLoot = api.executeGet("/lol-loot/v1/player-loot", LolLootPlayerLoot[].class);
                     for(LolLootPlayerLoot loot: allPlayerLoot) {
-                        if (loot.lootId.startsWith("CHAMPION_SKIN_RENTAL_")) {
+                        if(loot.lootId.startsWith("CHEST_128")) {
+                            for (int i = 0; i < loot.count; i++) {
+                                api.executePost("/lol-loot/v1/recipes/CHEST_128_open/craft", new String[]{loot.lootId});
+                            }
+                        }else if (loot.lootId.startsWith("CHAMPION_SKIN_RENTAL_")) {
                             for (int i = 0; i < loot.count; i++) {
                                 api.executePost("/lol-loot/v1/recipes/SKIN_RENTAL_disenchant/craft", new String[]{loot.lootId});
                             }
@@ -77,7 +80,7 @@ public class MaterialsPanel extends JPanel {
                 try {
                     LolLootPlayerLoot[] allPlayerLoot = api.executeGet("/lol-loot/v1/player-loot", LolLootPlayerLoot[].class);
                     for(LolLootPlayerLoot loot: allPlayerLoot) {
-                        if (loot.lootId.startsWith("CHAMPION_SKIN_RENTAL_")) {
+                        if (loot.lootId.startsWith("CHAMPION_SKIN_RENTAL_") && loot.redeemableStatus.equals(LolLootRedeemableStatus.ALREADY_OWNED)) {
                             for (int i = 0; i < loot.count; i++) {
                                 api.executePost("/lol-loot/v1/recipes/SKIN_RENTAL_disenchant/craft", new String[]{loot.lootId});
                             }

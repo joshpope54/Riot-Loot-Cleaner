@@ -10,7 +10,7 @@ import java.io.IOException;
 public class GUIHandler extends JFrame {
     public GUIHandler(ClientApi api, RetrieveCDragon dragon){
         setUndecorated(true);
-        setSize(510,240);
+        setSize(510,500);
         setBackground(new Color(255,255,255));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         UpperBar topBar = new UpperBar(this);
